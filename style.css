@@ -1,0 +1,645 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --bg-color: #f5f7fa;
+    --card-bg: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e1e8ed;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --kick-color: #e74c3c;
+    --snare-color: #3498db;
+    --hihat-color: #f39c12;
+    --bass-color: #9b59b6;
+    --guitar-color: #1abc9c;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.date-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+#date-display {
+    font-weight: 500;
+}
+
+main {
+    flex: 1;
+}
+
+/* 모드 선택 */
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.mode-btn {
+    background: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.mode-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* 모드 컨텐츠 */
+.mode-content {
+    display: none;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.mode-content.active {
+    display: block;
+}
+
+/* 난이도 선택 */
+.difficulty-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.difficulty-btn {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.difficulty-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.difficulty-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 박자 선택 */
+.time-signature-selector {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.time-signature-selector label {
+    margin-right: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.time-signature-selector select {
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* BPM 컨트롤 */
+.bpm-control {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.bpm-control label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.bpm-control input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e0e0e0;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.bpm-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+}
+
+.bpm-control input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+}
+
+/* 비트 시각화 */
+.beat-visualization {
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    min-height: 200px;
+}
+
+.beat-track {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.track-label {
+    width: 80px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.beat-grid {
+    flex: 1;
+    display: flex;
+    gap: 5px;
+    position: relative;
+}
+
+.beat-cell {
+    flex: 1;
+    height: 40px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.beat-cell.active {
+    background: var(--hihat-color);
+    border-color: var(--hihat-color);
+}
+
+.beat-track:nth-child(2) .beat-cell.active {
+    background: var(--snare-color);
+    border-color: var(--snare-color);
+}
+
+.beat-track:nth-child(3) .beat-cell.active {
+    background: var(--kick-color);
+    border-color: var(--kick-color);
+}
+
+.beat-track:nth-child(4) .beat-cell.active {
+    background: var(--bass-color);
+    border-color: var(--bass-color);
+}
+
+.beat-track:nth-child(5) .beat-cell.active {
+    background: var(--guitar-color);
+    border-color: var(--guitar-color);
+}
+
+.beat-cell.highlight {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    z-index: 10;
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary-color);
+    z-index: 100;
+    pointer-events: none;
+    transition: left 0.1s linear;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+}
+
+/* 컨트롤 버튼 */
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    background: white;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.control-btn.play-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 오늘의 비트 정보 */
+.today-beat-info {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 15px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.beat-description {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.beat-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    background: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.random-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.random-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, #5568d3 0%, #653a91 100%);
+}
+
+.random-btn:active {
+    transform: translateY(0);
+}
+
+/* 루딤먼트 모드 */
+.rudiment-selector {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.rudiment-selector label {
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.rudiment-selector select {
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.rudiment-display {
+    text-align: center;
+    margin: 30px 0;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.hand-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.hand {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    background: #e0e0e0;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.hand.active {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+.rudiment-pattern-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 10px;
+}
+
+/* 템포 트레이너 모드 */
+.tempo-trainer-controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tempo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tempo-input label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.tempo-input input[type="number"] {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.tempo-display {
+    text-align: center;
+    margin: 30px 0;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.current-bpm-display {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.tempo-progress {
+    width: 100%;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.1s linear;
+    border-radius: 10px;
+}
+
+.time-remaining {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0;
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.footer-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(102, 126, 234, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    color: white;
+}
+
+.loading.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 640px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .mode-selector {
+        flex-direction: column;
+    }
+    
+    .mode-btn {
+        width: 100%;
+    }
+    
+    .mode-content {
+        padding: 20px;
+    }
+    
+    .beat-visualization {
+        padding: 15px;
+    }
+    
+    .track-label {
+        width: 60px;
+        font-size: 0.8rem;
+    }
+    
+    .beat-cell {
+        height: 30px;
+    }
+    
+    .tempo-trainer-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .current-bpm-display {
+        font-size: 3rem;
+    }
+    
+    .hand {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .rudiment-pattern-text {
+        font-size: 1.5rem;
+        letter-spacing: 5px;
+    }
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .control-btn {
+        width: 100%;
+    }
+}

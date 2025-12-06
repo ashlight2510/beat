@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="드럼비트 연습기 - 메트로놈, 드럼 패턴 연습, 루딤먼트 훈련, 템포 트레이너. 매일 새로운 드럼 비트로 실력을 향상시키세요!"
+    />
+    <meta
+      name="keywords"
+      content="드럼 연습, 드럼비트, 메트로놈, 드럼 패턴, 루딤먼트, 드럼 훈련, BPM, 템포 트레이너, 드럼 연습기, 드럼 비트 연습, 드럼 연습 도구"
+    />
+    <meta name="author" content="AshLight" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#667eea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="드럼비트 연습기" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://drumbeat.ashlight.store/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://drumbeat.ashlight.store/" />
+    <meta
+      property="og:title"
+      content="드럼비트 연습기 🥁 - 메트로놈 & 드럼 패턴 연습"
+    />
+    <meta
+      property="og:description"
+      content="메트로놈, 드럼 패턴 연습, 루딤먼트 훈련, 템포 트레이너. 매일 새로운 드럼 비트로 실력을 향상시키세요!"
+    />
+    <meta
+      property="og:image"
+      content="https://drumbeat.ashlight.store/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="드럼비트 연습기" />
+    <meta property="og:site_name" content="드럼비트 연습기" />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://drumbeat.ashlight.store/" />
+    <meta name="twitter:title" content="드럼비트 연습기 🥁" />
+    <meta
+      name="twitter:description"
+      content="메트로놈, 드럼 패턴 연습, 루딤먼트 훈련, 템포 트레이너. 매일 새로운 드럼 비트로 실력을 향상시키세요!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://drumbeat.ashlight.store/og-image.png"
+    />
+    <meta name="twitter:image:alt" content="드럼비트 연습기" />
+
+    <title>드럼비트 연습기 🥁 - 메트로놈 & 드럼 패턴 연습</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JSON-LD 구조화된 데이터 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "드럼비트 연습기",
+        "url": "https://drumbeat.ashlight.store/",
+        "description": "메트로놈, 드럼 패턴 연습, 루딤먼트 훈련, 템포 트레이너를 제공하는 드럼 연습 도구",
+        "applicationCategory": "MusicApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "KRW"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AshLight",
+          "email": "ashlight2510@gmail.com"
+        },
+        "featureList": [
+          "메트로놈 (BPM 40-220)",
+          "드럼 패턴 재생",
+          "루딤먼트 훈련",
+          "템포 트레이너",
+          "오늘의 드럼 비트"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="title">드럼비트 연습기 🥁</h1>
+        <div class="date-info">
+          <span id="date-display">--</span>
+        </div>
+      </header>
+
+      <main>
+        <!-- 모드 선택 -->
+        <div class="mode-selector">
+          <button class="mode-btn active" data-mode="beat">기본 비트</button>
+          <button class="mode-btn" data-mode="rudiment">루딤먼트</button>
+          <button class="mode-btn" data-mode="tempo">템포 트레이너</button>
+        </div>
+
+        <!-- 기본 비트 모드 -->
+        <div id="beat-mode" class="mode-content active">
+          <!-- 난이도 선택 -->
+          <div class="difficulty-selector">
+            <button class="difficulty-btn active" data-difficulty="beginner">Beginner</button>
+            <button class="difficulty-btn" data-difficulty="intermediate">Intermediate</button>
+            <button class="difficulty-btn" data-difficulty="advanced">Advanced</button>
+          </div>
+
+          <!-- 박자 선택 -->
+          <div class="time-signature-selector">
+            <label>박자:</label>
+            <select id="time-signature">
+              <option value="4/4">4/4</option>
+              <option value="3/4">3/4</option>
+              <option value="6/8">6/8</option>
+            </select>
+          </div>
+
+          <!-- BPM 컨트롤 -->
+          <div class="bpm-control">
+            <label for="bpm-slider">BPM: <span id="bpm-value">120</span></label>
+            <input type="range" id="bpm-slider" min="40" max="220" value="120" />
+          </div>
+
+          <!-- 비트 시각화 -->
+          <div class="beat-visualization">
+            <div class="beat-track">
+              <div class="track-label">하이햇</div>
+              <div class="beat-grid" id="hihat-grid"></div>
+            </div>
+            <div class="beat-track">
+              <div class="track-label">스네어</div>
+              <div class="beat-grid" id="snare-grid"></div>
+            </div>
+            <div class="beat-track">
+              <div class="track-label">킥</div>
+              <div class="beat-grid" id="kick-grid"></div>
+            </div>
+            <div class="beat-track">
+              <div class="track-label">베이스</div>
+              <div class="beat-grid" id="bass-grid"></div>
+            </div>
+            <div class="beat-track">
+              <div class="track-label">기타</div>
+              <div class="beat-grid" id="guitar-grid"></div>
+            </div>
+            <div class="playhead" id="playhead"></div>
+          </div>
+
+          <!-- 컨트롤 버튼 -->
+          <div class="controls">
+            <button id="play-pause-btn" class="control-btn play-btn">▶ 재생</button>
+            <button id="mute-btn" class="control-btn">🔇 뮤트 모드</button>
+            <button id="reset-btn" class="control-btn">🔄 리셋</button>
+          </div>
+
+          <!-- 오늘의 비트 정보 -->
+          <div class="today-beat-info">
+            <div class="beat-description" id="beat-description">
+              오늘의 드럼 비트를 불러오는 중...
+            </div>
+            <div class="beat-controls">
+              <button id="random-beat-btn" class="random-btn">🎲 랜덤 비트</button>
+              <button id="random-melody-btn" class="random-btn">🎵 랜덤 멜로디</button>
+              <button id="share-beat-btn" class="share-btn">공유하기 📤</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 루딤먼트 모드 -->
+        <div id="rudiment-mode" class="mode-content">
+          <div class="rudiment-selector">
+            <label>루딤먼트 패턴:</label>
+            <select id="rudiment-pattern">
+              <option value="single">Single Stroke (R L R L)</option>
+              <option value="double">Double Stroke (R R L L)</option>
+              <option value="paradiddle">Paradiddle (R L R R / L R L L)</option>
+              <option value="flam">Flam (R L R L)</option>
+            </select>
+          </div>
+          <div class="bpm-control">
+            <label for="rudiment-bpm">BPM: <span id="rudiment-bpm-value">120</span></label>
+            <input type="range" id="rudiment-bpm" min="40" max="220" value="120" />
+          </div>
+          <div class="rudiment-display">
+            <div class="hand-indicator" id="hand-indicator">
+              <div class="hand left" id="left-hand">L</div>
+              <div class="hand right" id="right-hand">R</div>
+            </div>
+            <div class="rudiment-pattern-text" id="rudiment-pattern-text">R L R R</div>
+          </div>
+          <div class="controls">
+            <button id="rudiment-play-btn" class="control-btn play-btn">▶ 재생</button>
+            <button id="rudiment-reset-btn" class="control-btn">🔄 리셋</button>
+          </div>
+        </div>
+
+        <!-- 템포 트레이너 모드 -->
+        <div id="tempo-mode" class="mode-content">
+          <div class="tempo-trainer-controls">
+            <div class="tempo-input">
+              <label>시작 BPM:</label>
+              <input type="number" id="start-bpm" min="40" max="200" value="80" />
+            </div>
+            <div class="tempo-input">
+              <label>목표 BPM:</label>
+              <input type="number" id="target-bpm" min="40" max="220" value="120" />
+            </div>
+            <div class="tempo-input">
+              <label>연습 시간 (분):</label>
+              <input type="number" id="practice-time" min="1" max="30" value="5" />
+            </div>
+            <div class="tempo-input">
+              <label>BPM 증가량:</label>
+              <input type="number" id="bpm-increment" min="1" max="10" value="2" step="0.5" />
+            </div>
+          </div>
+          <div class="tempo-display">
+            <div class="current-bpm-display" id="current-bpm-display">80</div>
+            <div class="tempo-progress">
+              <div class="progress-bar" id="tempo-progress-bar"></div>
+            </div>
+            <div class="time-remaining" id="time-remaining">5:00</div>
+          </div>
+          <div class="controls">
+            <button id="tempo-start-btn" class="control-btn play-btn">▶ 시작</button>
+            <button id="tempo-stop-btn" class="control-btn">⏹ 정지</button>
+            <button id="tempo-reset-btn" class="control-btn">🔄 리셋</button>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          © 2025
+          <a href="mailto:ashlight2510@gmail.com" class="footer-link"
+            >AshLight</a
+          >. All rights reserved.
+        </p>
+      </footer>
+    </div>
+
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>드럼 비트를 불러오는 중...</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

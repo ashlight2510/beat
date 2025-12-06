@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#grad)"/>
+  <!-- 드럼 스틱 -->
+  <g transform="translate(32, 32)">
+    <!-- 왼쪽 스틱 -->
+    <line x1="-12" y1="-8" x2="-8" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="-10" cy="-6" r="1.5" fill="white"/>
+    <!-- 오른쪽 스틱 -->
+    <line x1="8" y1="-8" x2="12" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="10" cy="-6" r="1.5" fill="white"/>
+    <!-- 드럼 심볼 -->
+    <circle cx="0" cy="0" r="8" fill="none" stroke="white" stroke-width="2"/>
+    <circle cx="0" cy="0" r="4" fill="white" opacity="0.3"/>
+  </g>
+</svg>
