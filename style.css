@@ -519,6 +519,66 @@ main {
     color: var(--text-primary);
 }
 
+/* 추가 테스트 버튼 */
+.more-tests-section {
+    margin: 30px 0 10px;
+}
+
+.more-tests-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.more-tests-eyebrow {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.more-tests-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.more-tests-note {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.more-tests-btn {
+    width: 100%;
+    max-width: 420px;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.more-tests-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.more-tests-btn:active {
+    transform: translateY(0);
+    opacity: 0.95;
+}
+
 footer {
     text-align: center;
     padding: 30px 0;

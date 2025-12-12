@@ -37,11 +37,11 @@
     />
     <meta
       property="og:image"
-      content="https://drumbeat.ashlight.store/og-image.png"
+      content="https://dummyimage.com/1200x630/1f2937/f9fafb&text=Drum+Beat+Trainer"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="드럼비트 연습기" />
+    <meta property="og:image:alt" content="Drum Beat Trainer" />
     <meta property="og:site_name" content="드럼비트 연습기" />
     <meta property="og:locale" content="ko_KR" />
 
@@ -60,9 +60,18 @@
     <meta name="twitter:image:alt" content="드럼비트 연습기" />
 
     <title>드럼비트 연습기 🥁 - 메트로놈 & 드럼 패턴 연습</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%A5%81%3C/text%3E%3C/svg%3E"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%A5%81%3C/text%3E%3C/svg%3E"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%A5%81%3C/text%3E%3C/svg%3E"
+    />
     <link rel="apple-touch-icon" href="favicon.png" />
     <link rel="stylesheet" href="style.css" />
 
@@ -117,9 +126,15 @@
         <div id="beat-mode" class="mode-content active">
           <!-- 난이도 선택 -->
           <div class="difficulty-selector">
-            <button class="difficulty-btn active" data-difficulty="beginner">Beginner</button>
-            <button class="difficulty-btn" data-difficulty="intermediate">Intermediate</button>
-            <button class="difficulty-btn" data-difficulty="advanced">Advanced</button>
+            <button class="difficulty-btn active" data-difficulty="beginner">
+              Beginner
+            </button>
+            <button class="difficulty-btn" data-difficulty="intermediate">
+              Intermediate
+            </button>
+            <button class="difficulty-btn" data-difficulty="advanced">
+              Advanced
+            </button>
           </div>
 
           <!-- 박자 선택 -->
@@ -135,7 +150,13 @@
           <!-- BPM 컨트롤 -->
           <div class="bpm-control">
             <label for="bpm-slider">BPM: <span id="bpm-value">120</span></label>
-            <input type="range" id="bpm-slider" min="40" max="220" value="120" />
+            <input
+              type="range"
+              id="bpm-slider"
+              min="40"
+              max="220"
+              value="120"
+            />
           </div>
 
           <!-- 비트 시각화 -->
@@ -165,7 +186,9 @@
 
           <!-- 컨트롤 버튼 -->
           <div class="controls">
-            <button id="play-pause-btn" class="control-btn play-btn">▶ 재생</button>
+            <button id="play-pause-btn" class="control-btn play-btn">
+              ▶ 재생
+            </button>
             <button id="mute-btn" class="control-btn">🔇 뮤트 모드</button>
             <button id="reset-btn" class="control-btn">🔄 리셋</button>
           </div>
@@ -176,18 +199,34 @@
               오늘의 드럼 비트를 불러오는 중...
             </div>
             <div class="beat-controls">
-              <button id="random-beat-btn" class="random-btn">🎲 랜덤 비트</button>
-              <button id="random-melody-btn" class="random-btn">🎵 랜덤 멜로디</button>
+              <button id="random-beat-btn" class="random-btn">
+                🎲 랜덤 비트
+              </button>
+              <button id="random-melody-btn" class="random-btn">
+                🎵 랜덤 멜로디
+              </button>
               <button id="share-beat-btn" class="share-btn">공유하기 📤</button>
             </div>
           </div>
 
           <!-- 카카오 광고 -->
-          <div class="ad-container" style="display: flex; justify-content: center; align-items: center; margin: 20px auto; min-height: 250px;">
-            <ins class="kakao_ad_area" style="display:none; margin: 0 auto;"
+          <div
+            class="ad-container"
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 20px auto;
+              min-height: 250px;
+            "
+          >
+            <ins
+              class="kakao_ad_area"
+              style="display: none; margin: 0 auto"
               data-ad-unit="DAN-x9wkYzc5b3yttLdX"
               data-ad-width="300"
-              data-ad-height="250"></ins>
+              data-ad-height="250"
+            ></ins>
           </div>
         </div>
 
@@ -203,18 +242,30 @@
             </select>
           </div>
           <div class="bpm-control">
-            <label for="rudiment-bpm">BPM: <span id="rudiment-bpm-value">120</span></label>
-            <input type="range" id="rudiment-bpm" min="40" max="220" value="120" />
+            <label for="rudiment-bpm"
+              >BPM: <span id="rudiment-bpm-value">120</span></label
+            >
+            <input
+              type="range"
+              id="rudiment-bpm"
+              min="40"
+              max="220"
+              value="120"
+            />
           </div>
           <div class="rudiment-display">
             <div class="hand-indicator" id="hand-indicator">
               <div class="hand left" id="left-hand">L</div>
               <div class="hand right" id="right-hand">R</div>
             </div>
-            <div class="rudiment-pattern-text" id="rudiment-pattern-text">R L R R</div>
+            <div class="rudiment-pattern-text" id="rudiment-pattern-text">
+              R L R R
+            </div>
           </div>
           <div class="controls">
-            <button id="rudiment-play-btn" class="control-btn play-btn">▶ 재생</button>
+            <button id="rudiment-play-btn" class="control-btn play-btn">
+              ▶ 재생
+            </button>
             <button id="rudiment-reset-btn" class="control-btn">🔄 리셋</button>
           </div>
         </div>
@@ -224,19 +275,44 @@
           <div class="tempo-trainer-controls">
             <div class="tempo-input">
               <label>시작 BPM:</label>
-              <input type="number" id="start-bpm" min="40" max="200" value="80" />
+              <input
+                type="number"
+                id="start-bpm"
+                min="40"
+                max="200"
+                value="80"
+              />
             </div>
             <div class="tempo-input">
               <label>목표 BPM:</label>
-              <input type="number" id="target-bpm" min="40" max="220" value="120" />
+              <input
+                type="number"
+                id="target-bpm"
+                min="40"
+                max="220"
+                value="120"
+              />
             </div>
             <div class="tempo-input">
               <label>연습 시간 (분):</label>
-              <input type="number" id="practice-time" min="1" max="30" value="5" />
+              <input
+                type="number"
+                id="practice-time"
+                min="1"
+                max="30"
+                value="5"
+              />
             </div>
             <div class="tempo-input">
               <label>BPM 증가량:</label>
-              <input type="number" id="bpm-increment" min="1" max="10" value="2" step="0.5" />
+              <input
+                type="number"
+                id="bpm-increment"
+                min="1"
+                max="10"
+                value="2"
+                step="0.5"
+              />
             </div>
           </div>
           <div class="tempo-display">
@@ -247,18 +323,40 @@
             <div class="time-remaining" id="time-remaining">5:00</div>
           </div>
           <div class="controls">
-            <button id="tempo-start-btn" class="control-btn play-btn">▶ 시작</button>
+            <button id="tempo-start-btn" class="control-btn play-btn">
+              ▶ 시작
+            </button>
             <button id="tempo-stop-btn" class="control-btn">⏹ 정지</button>
             <button id="tempo-reset-btn" class="control-btn">🔄 리셋</button>
           </div>
         </div>
       </main>
 
-      <ins class="kakao_ad_area" style="display:none;"
-data-ad-unit = "DAN-rhG30CtYBfsa04K0"
-data-ad-width = "250"
-data-ad-height = "250"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+      <ins
+        class="kakao_ad_area"
+        style="display: none"
+        data-ad-unit="DAN-rhG30CtYBfsa04K0"
+        data-ad-width="250"
+        data-ad-height="250"
+      ></ins>
+      <script
+        type="text/javascript"
+        src="//t1.daumcdn.net/kas/static/ba.min.js"
+        async
+      ></script>
+
+      <section class="more-tests-section">
+        <div class="more-tests-card">
+          <div class="more-tests-text">
+            <p class="more-tests-eyebrow">여기서 멈추기 아쉽죠</p>
+            <p class="more-tests-title">다른 재밌는 것들도 있어요</p>
+            <p class="more-tests-note">생각보다 취향 저격일지도 몰라요 👀</p>
+          </div>
+          <button id="more-tests-btn" class="more-tests-btn" type="button">
+            더 구경하기
+          </button>
+        </div>
+      </section>
 
       <footer>
         <p>
@@ -276,5 +374,17 @@ data-ad-height = "250"></ins>
     </div>
 
     <script src="script.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        const targetUrl = "https://funnyfunny.cloud/";
+        const moreBtn = document.getElementById("more-tests-btn");
+        if (moreBtn) {
+          moreBtn.addEventListener("click", function () {
+            window.open(targetUrl, "_blank", "noopener");
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

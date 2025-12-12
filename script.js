@@ -69,6 +69,282 @@ const elements = {
     tempoResetBtn: document.getElementById('tempo-reset-btn')
 };
 
+// 네트워크 오류 시 사용할 기본 드럼 데이터
+const fallbackBeatsData = {
+    "beginner": [
+        {
+            "name": "기본 8비트 락",
+            "description": "Rock 8beat - 가장 기본적인 락 드럼 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 4, 8, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14],
+            "bass": [0, 4, 8, 12],
+            "bassNotes": { "0": 60, "4": 60, "8": 60, "12": 60 },
+            "guitar": [0, 4, 8, 12],
+            "guitarChords": { "0": [64, 67, 71], "4": [64, 67, 71], "8": [64, 67, 71], "12": [64, 67, 71] }
+        },
+        {
+            "name": "발라드 하이햇",
+            "description": "Ballad Hi-hat - 부드러운 발라드 스타일",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [4, 12],
+            "hihat": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+            "bass": [0, 8],
+            "bassNotes": { "0": 60, "8": 60 },
+            "guitar": [0, 4, 8, 12],
+            "guitarChords": { "0": [64, 67, 71], "4": [65, 69, 72], "8": [64, 67, 71], "12": [65, 69, 72] }
+        },
+        {
+            "name": "간단한 셔플",
+            "description": "Simple Shuffle - 스윙 느낌의 셔플 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 6, 12],
+            "snare": [4, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "포크 락 비트",
+            "description": "Folk Rock - 포크락 스타일의 심플한 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "딩가 댕가",
+            "description": "Dinga Danga - 간단한 8비트",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "카우벨 비트",
+            "description": "Cowbell Groove - 카우벨 느낌의 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 7, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "브러쉬 느낌",
+            "description": "Brush Groove - 브러쉬 느낌의 부드러운 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [2, 6, 10, 14],
+            "hihat": [1, 5, 9, 13]
+        },
+        {
+            "name": "펑크 베이식",
+            "description": "Funk Basic - 펑키한 베이식 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 10],
+            "snare": [4, 12],
+            "hihat": [0, 4, 8, 12]
+        },
+        {
+            "name": "미니멀 스윙",
+            "description": "Minimal Swing - 간단한 스윙 느낌",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [4, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "도트 리듬",
+            "description": "Dotted Groove - 도트 리듬을 활용한 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 7, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 7, 8, 10, 12, 14]
+        }
+    ],
+    "intermediate": [
+        {
+            "name": "하프타임 셔플",
+            "description": "Halftime Shuffle - 퍼커시브한 셔플 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 6, 12],
+            "snare": [4, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "싱코페이션 1",
+            "description": "Syncopation I - 싱코페이션이 들어간 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 7, 10, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "싱코페이션 2",
+            "description": "Syncopation II - 변형된 싱코페이션 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 5, 10, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "스티브 갯 느낌",
+            "description": "Steve Gadd Style - 고급 셔플 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 6, 8, 12],
+            "snare": [4, 10, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "필인 연습",
+            "description": "Fill-in Practice - 필인을 연습하기 위한 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14],
+            "guitar": [12, 13, 14, 15]
+        },
+        {
+            "name": "트리플렛 필",
+            "description": "Triplet Fill - 트리플렛 필인 연습",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [4, 12],
+            "hihat": [0, 3, 6, 9, 12, 15],
+            "guitar": [10, 11, 12]
+        },
+        {
+            "name": "골든 에이지 펑크",
+            "description": "Golden Age Funk - 70년대 펑크 느낌",
+            "timeSignature": "4/4",
+            "kick": [0, 7, 9, 12],
+            "snare": [4, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "던스텝 베이스",
+            "description": "Dunst Beat - 둔스텝 베이스 중심 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 5, 10, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "루틴 필",
+            "description": "Routine Fill - 루틴한 필인 연습",
+            "timeSignature": "4/4",
+            "kick": [0, 7, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "집시 스윙",
+            "description": "Gypsy Swing - 집시 재즈 느낌",
+            "timeSignature": "4/4",
+            "kick": [0, 6, 12],
+            "snare": [4, 10, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        }
+    ],
+    "advanced": [
+        {
+            "name": "재즈 라이드",
+            "description": "Jazz Ride - 재즈 라이드 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [2, 6, 10, 14],
+            "hihat": [2, 6, 10, 14]
+        },
+        {
+            "name": "하프타임 그루브",
+            "description": "Halftime Groove - 무거운 하프타임 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 6, 12],
+            "snare": [8],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "프로그레시브 메탈",
+            "description": "Progressive Metal - 복잡한 메탈 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 2, 4, 6, 8, 10, 12, 14],
+            "snare": [4, 12],
+            "hihat": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        },
+        {
+            "name": "복합 리듬",
+            "description": "Complex Rhythm - 변박이 많은 고급 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 5, 10, 13],
+            "snare": [3, 7, 11, 15],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "라틴 퓨전",
+            "description": "Latin Fusion - 라틴 느낌의 퓨전 비트",
+            "timeSignature": "4/4",
+            "kick": [0, 6, 12],
+            "snare": [4, 10, 12],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "고속 더블킥",
+            "description": "Double Kick - 고속 더블킥 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 2, 4, 6, 8, 10, 12, 14],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "컨템포러리 스윙",
+            "description": "Contemporary Swing - 현대적인 스윙 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 8],
+            "snare": [2, 6, 10, 14],
+            "hihat": [0, 3, 6, 9, 12, 15]
+        },
+        {
+            "name": "브라질리언",
+            "description": "Brazilian Groove - 브라질 리듬",
+            "timeSignature": "4/4",
+            "kick": [0, 7, 12],
+            "snare": [4, 12],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "프로그레시브 록",
+            "description": "Progressive Rock - 복잡한 프로그레시브 록 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 3, 6, 9, 12, 15],
+            "snare": [2, 5, 8, 11, 14],
+            "hihat": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        },
+        {
+            "name": "7/8 변박",
+            "description": "7/8 Odd Time - 7박자 변박 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 4, 8, 12],
+            "snare": [3, 7, 11],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        },
+        {
+            "name": "폴리리듬",
+            "description": "Polyrhythm - 폴리리듬 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 3, 6, 9, 12, 15],
+            "snare": [2, 6, 10, 14],
+            "hihat": [0, 1, 4, 5, 8, 9, 12, 13]
+        },
+        {
+            "name": "어프로치 비트",
+            "description": "Approach Beat - 고급 싱코페이션 패턴",
+            "timeSignature": "4/4",
+            "kick": [0, 2, 5, 8, 11, 14],
+            "snare": [1, 4, 7, 10, 13],
+            "hihat": [0, 2, 4, 6, 8, 10, 12, 14]
+        }
+    ]
+};
+
 // 날짜 표시 업데이트
 function updateDateDisplay() {
     const today = new Date();
@@ -424,31 +700,32 @@ function regenerateMelody() {
 
 // 비트 데이터 로드
 async function loadBeats() {
+    elements.loading.classList.remove('hidden');
+
     try {
-        elements.loading.classList.remove('hidden');
-        
-        const response = await fetch('beats.json');
+        const response = await fetch('beats.json', { cache: 'no-store' });
         if (!response.ok) {
             throw new Error('비트 데이터를 불러올 수 없습니다.');
         }
-        
+
         beatsData = await response.json();
-        currentBeat = getTodayBeat();
-        
-        if (currentBeat) {
-            // 랜덤 멜로디 자동 적용
-            applyRandomMelody(currentBeat);
-            displayBeat(currentBeat);
-        } else {
-            throw new Error('비트를 불러올 수 없습니다.');
-        }
-        
-        elements.loading.classList.add('hidden');
     } catch (error) {
-        elements.loading.classList.add('hidden');
-        console.error('비트 로드 실패:', error);
+        console.error('비트 로드 실패, 기본 데이터 사용:', error);
+        // 네트워크 실패 시에도 사용자가 연습할 수 있도록 기본 데이터 적용
+        beatsData = JSON.parse(JSON.stringify(fallbackBeatsData));
+    }
+
+    currentBeat = getTodayBeat();
+
+    if (currentBeat) {
+        // 랜덤 멜로디 자동 적용
+        applyRandomMelody(currentBeat);
+        displayBeat(currentBeat);
+    } else {
         alert('비트를 불러올 수 없습니다. 페이지를 새로고침해주세요.');
     }
+
+    elements.loading.classList.add('hidden');
 }
 
 // 비트 그리드 생성
