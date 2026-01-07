@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://drumbeat.ashlight.store/sitemap.xml
+Sitemap: https://drumbeat.funnyfunny.cloud/sitemap.xml
