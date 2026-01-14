@@ -746,6 +746,7 @@ function createBeatGrid(container, pattern, steps = 16) {
 
 // 비트 표시
 function displayBeat(beat) {
+    const t = window.t || ((key, vars = {}) => key);
     const steps = beat.timeSignature === '3/4' ? 12 : beat.timeSignature === '6/8' ? 12 : 16;
     
     createBeatGrid(elements.kickGrid, beat.kick || [], steps);
@@ -754,7 +755,9 @@ function displayBeat(beat) {
     createBeatGrid(elements.bassGrid, beat.bass || [], steps);
     createBeatGrid(elements.guitarGrid, beat.guitar || [], steps);
     
-    elements.beatDescription.textContent = `${beat.name} - ${beat.description}`;
+    if (elements.beatDescription) {
+        elements.beatDescription.textContent = `${beat.name} - ${beat.description}`;
+    }
     
     currentBeat = beat;
     updatePlayheadPosition(0);
