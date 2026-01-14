@@ -956,8 +956,9 @@ function startRudiment() {
 }
 
 function stopRudiment() {
+    const t = window.t || ((key, vars = {}) => key);
     isRudimentPlaying = false;
-    elements.rudimentPlayBtn.textContent = '▶ 재생';
+    elements.rudimentPlayBtn.textContent = t('btnPlay');
     if (rudimentInterval) {
         clearInterval(rudimentInterval);
         rudimentInterval = null;
