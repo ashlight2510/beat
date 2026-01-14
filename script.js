@@ -347,11 +347,12 @@ const fallbackBeatsData = {
 
 // 날짜 표시 업데이트
 function updateDateDisplay() {
+    const t = window.t || ((key, vars = {}) => key);
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const date = String(today.getDate()).padStart(2, '0');
-    const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayNames = t('dayNames') || ['일', '월', '화', '수', '목', '금', '토'];
     const dayName = dayNames[today.getDay()];
     
     elements.dateDisplay.textContent = `${year}.${month}.${date} (${dayName})`;
@@ -700,12 +701,13 @@ function regenerateMelody() {
 
 // 비트 데이터 로드
 async function loadBeats() {
+    const t = window.t || ((key, vars = {}) => key);
     elements.loading.classList.remove('hidden');
 
     try {
         const response = await fetch('beats.json', { cache: 'no-store' });
         if (!response.ok) {
-            throw new Error('비트 데이터를 불러올 수 없습니다.');
+            throw new Error(t('errorLoadBeats'));
         }
 
         beatsData = await response.json();
@@ -722,7 +724,7 @@ async function loadBeats() {
         applyRandomMelody(currentBeat);
         displayBeat(currentBeat);
     } else {
-        alert('비트를 불러올 수 없습니다. 페이지를 새로고침해주세요.');
+        alert(t('errorLoadBeat'));
     }
 
     elements.loading.classList.add('hidden');
@@ -781,8 +783,9 @@ function updatePlayheadPosition(position) {
 function startBeat() {
     if (!currentBeat) return;
     
+    const t = window.t || ((key, vars = {}) => key);
     isPlaying = true;
-    elements.playPauseBtn.textContent = '⏸ 정지';
+    elements.playPauseBtn.textContent = t('btnPause');
     initAudioContext();
     
     const steps = currentBeat.timeSignature === '3/4' ? 12 : currentBeat.timeSignature === '6/8' ? 12 : 16;
@@ -829,8 +832,9 @@ function startBeat() {
 
 // 비트 정지
 function stopBeat() {
+    const t = window.t || ((key, vars = {}) => key);
     isPlaying = false;
-    elements.playPauseBtn.textContent = '▶ 재생';
+    elements.playPauseBtn.textContent = t('btnPlay');
     if (beatInterval) {
         clearInterval(beatInterval);
         beatInterval = null;
@@ -918,13 +922,14 @@ let rudimentPosition = 0;
 let isRudimentPlaying = false;
 
 function startRudiment() {
+    const t = window.t || ((key, vars = {}) => key);
     const patternKey = elements.rudimentPattern.value;
     const pattern = rudimentPatterns[patternKey].pattern;
     const bpm = parseInt(elements.rudimentBpm.value);
     const noteTime = (60.0 / bpm) / 4;
     
     isRudimentPlaying = true;
-    elements.rudimentPlayBtn.textContent = '⏸ 정지';
+    elements.rudimentPlayBtn.textContent = t('btnPause');
     initAudioContext();
     
     rudimentPosition = 0;
@@ -1050,14 +1055,20 @@ function resetTempoTrainer() {
 
 // 공유 기능
 async function shareBeat() {
+    const t = window.t || ((key, vars = {}) => key);
     if (!currentBeat) return;
     
-    const shareText = `오늘의 드럼 비트 🥁\n\n${currentBeat.name}\n${currentBeat.description}\nBPM: ${currentBPM}\n\n👇 연습해보세요!\n${window.location.href}`;
+    const shareText = t('shareText', {
+        name: currentBeat.name,
+        description: currentBeat.description,
+        bpm: currentBPM,
+        url: window.location.href
+    });
     
     if (navigator.share) {
         try {
             await navigator.share({
-                title: '오늘의 드럼 비트',
+                title: t('shareTitle'),
                 text: shareText,
                 url: window.location.href
             });
@@ -1072,12 +1083,13 @@ async function shareBeat() {
 }
 
 function fallbackShare(text) {
+    const t = window.t || ((key, vars = {}) => key);
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
-            alert('클립보드에 복사되었습니다!');
+            alert(t('copiedToClipboard'));
         });
     } else {
-        prompt('아래 텍스트를 복사하세요:', text);
+        prompt(t('copyPrompt'), text);
     }
 }
 
@@ -1091,8 +1103,9 @@ elements.playPauseBtn.addEventListener('click', () => {
     }
 });
 elements.muteBtn.addEventListener('click', () => {
+    const t = window.t || ((key, vars = {}) => key);
     isMuteMode = !isMuteMode;
-    elements.muteBtn.textContent = isMuteMode ? '🔊 사운드 모드' : '🔇 뮤트 모드';
+    elements.muteBtn.textContent = isMuteMode ? t('btnSoundMode') : t('btnMute');
 });
 elements.resetBtn.addEventListener('click', resetBeat);
 elements.shareBeatBtn.addEventListener('click', shareBeat);

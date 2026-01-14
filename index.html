@@ -143,10 +143,53 @@
         text-align: center;
 }
   </style>
+  <style>
+    .lang-switch {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: inline-flex;
+      gap: 0;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+    }
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 44px;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .lang-switch button.active {
+      background: #667eea;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+    .lang-switch button:not(.active):hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: rgba(0, 0, 0, 0.9);
+    }
+  </style>
 </head>
-  <body><div class="container">
+  <body>
+  <div class="lang-switch" role="tablist" aria-label="Language switcher">
+    <button type="button" data-lang="ko" class="active">KR</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <div class="container">
       <header>
-        <h1 class="title">드럼비트 연습기 🥁</h1>
+        <h1 class="title" data-i18n="title">드럼비트 연습기 🥁</h1>
         <div class="date-info">
           <span id="date-display">--</span>
         </div>
@@ -155,9 +198,9 @@
       <main>
         <!-- 모드 선택 -->
         <div class="mode-selector">
-          <button class="mode-btn active" data-mode="beat">기본 비트</button>
-          <button class="mode-btn" data-mode="rudiment">루딤먼트</button>
-          <button class="mode-btn" data-mode="tempo">템포 트레이너</button>
+          <button class="mode-btn active" data-mode="beat" data-i18n="modeBeat">기본 비트</button>
+          <button class="mode-btn" data-mode="rudiment" data-i18n="modeRudiment">루딤먼트</button>
+          <button class="mode-btn" data-mode="tempo" data-i18n="modeTempo">템포 트레이너</button>
         </div>
 
         <!-- 기본 비트 모드 -->
@@ -177,7 +220,7 @@
 
           <!-- 박자 선택 -->
           <div class="time-signature-selector">
-            <label>박자:</label>
+            <label data-i18n="labelTimeSignature">박자:</label>
             <select id="time-signature">
               <option value="4/4">4/4</option>
               <option value="3/4">3/4</option>
@@ -200,23 +243,23 @@
           <!-- 비트 시각화 -->
           <div class="beat-visualization">
             <div class="beat-track">
-              <div class="track-label">하이햇</div>
+              <div class="track-label" data-i18n="trackHihat">하이햇</div>
               <div class="beat-grid" id="hihat-grid"></div>
             </div>
             <div class="beat-track">
-              <div class="track-label">스네어</div>
+              <div class="track-label" data-i18n="trackSnare">스네어</div>
               <div class="beat-grid" id="snare-grid"></div>
             </div>
             <div class="beat-track">
-              <div class="track-label">킥</div>
+              <div class="track-label" data-i18n="trackKick">킥</div>
               <div class="beat-grid" id="kick-grid"></div>
             </div>
             <div class="beat-track">
-              <div class="track-label">베이스</div>
+              <div class="track-label" data-i18n="trackBass">베이스</div>
               <div class="beat-grid" id="bass-grid"></div>
             </div>
             <div class="beat-track">
-              <div class="track-label">기타</div>
+              <div class="track-label" data-i18n="trackGuitar">기타</div>
               <div class="beat-grid" id="guitar-grid"></div>
             </div>
             <div class="playhead" id="playhead"></div>
@@ -224,26 +267,26 @@
 
           <!-- 컨트롤 버튼 -->
           <div class="controls">
-            <button id="play-pause-btn" class="control-btn play-btn">
+            <button id="play-pause-btn" class="control-btn play-btn" data-i18n="btnPlay">
               ▶ 재생
             </button>
-            <button id="mute-btn" class="control-btn">🔇 뮤트 모드</button>
-            <button id="reset-btn" class="control-btn">🔄 리셋</button>
+            <button id="mute-btn" class="control-btn" data-i18n="btnMute">🔇 뮤트 모드</button>
+            <button id="reset-btn" class="control-btn" data-i18n="btnReset">🔄 리셋</button>
           </div>
 
           <!-- 오늘의 비트 정보 -->
           <div class="today-beat-info">
-            <div class="beat-description" id="beat-description">
+            <div class="beat-description" id="beat-description" data-i18n="loadingBeat">
               오늘의 드럼 비트를 불러오는 중...
             </div>
             <div class="beat-controls">
-              <button id="random-beat-btn" class="random-btn">
+              <button id="random-beat-btn" class="random-btn" data-i18n="btnRandomBeat">
                 🎲 랜덤 비트
               </button>
-              <button id="random-melody-btn" class="random-btn">
+              <button id="random-melody-btn" class="random-btn" data-i18n="btnRandomMelody">
                 🎵 랜덤 멜로디
               </button>
-              <button id="share-beat-btn" class="share-btn">공유하기 📤</button>
+              <button id="share-beat-btn" class="share-btn" data-i18n="btnShare">공유하기 📤</button>
             </div>
           </div>
 
@@ -264,12 +307,12 @@
         <!-- 루딤먼트 모드 -->
         <div id="rudiment-mode" class="mode-content">
           <div class="rudiment-selector">
-            <label>루딤먼트 패턴:</label>
+            <label data-i18n="labelRudimentPattern">루딤먼트 패턴:</label>
             <select id="rudiment-pattern">
-              <option value="single">Single Stroke (R L R L)</option>
-              <option value="double">Double Stroke (R R L L)</option>
-              <option value="paradiddle">Paradiddle (R L R R / L R L L)</option>
-              <option value="flam">Flam (R L R L)</option>
+              <option value="single" data-i18n-option="rudimentSingle">Single Stroke (R L R L)</option>
+              <option value="double" data-i18n-option="rudimentDouble">Double Stroke (R R L L)</option>
+              <option value="paradiddle" data-i18n-option="rudimentParadiddle">Paradiddle (R L R R / L R L L)</option>
+              <option value="flam" data-i18n-option="rudimentFlam">Flam (R L R L)</option>
             </select>
           </div>
           <div class="bpm-control">
@@ -294,10 +337,10 @@
             </div>
           </div>
           <div class="controls">
-            <button id="rudiment-play-btn" class="control-btn play-btn">
+            <button id="rudiment-play-btn" class="control-btn play-btn" data-i18n="btnPlay">
               ▶ 재생
             </button>
-            <button id="rudiment-reset-btn" class="control-btn">🔄 리셋</button>
+            <button id="rudiment-reset-btn" class="control-btn" data-i18n="btnReset">🔄 리셋</button>
           </div>
         </div>
 
@@ -305,7 +348,7 @@
         <div id="tempo-mode" class="mode-content">
           <div class="tempo-trainer-controls">
             <div class="tempo-input">
-              <label>시작 BPM:</label>
+              <label data-i18n="labelStartBpm">시작 BPM:</label>
               <input
                 type="number"
                 id="start-bpm"
@@ -315,7 +358,7 @@
               />
             </div>
             <div class="tempo-input">
-              <label>목표 BPM:</label>
+              <label data-i18n="labelTargetBpm">목표 BPM:</label>
               <input
                 type="number"
                 id="target-bpm"
@@ -325,7 +368,7 @@
               />
             </div>
             <div class="tempo-input">
-              <label>연습 시간 (분):</label>
+              <label data-i18n="labelPracticeTime">연습 시간 (분):</label>
               <input
                 type="number"
                 id="practice-time"
@@ -335,7 +378,7 @@
               />
             </div>
             <div class="tempo-input">
-              <label>BPM 증가량:</label>
+              <label data-i18n="labelBpmIncrement">BPM 증가량:</label>
               <input
                 type="number"
                 id="bpm-increment"
@@ -354,11 +397,11 @@
             <div class="time-remaining" id="time-remaining">5:00</div>
           </div>
           <div class="controls">
-            <button id="tempo-start-btn" class="control-btn play-btn">
+            <button id="tempo-start-btn" class="control-btn play-btn" data-i18n="btnStart">
               ▶ 시작
             </button>
-            <button id="tempo-stop-btn" class="control-btn">⏹ 정지</button>
-            <button id="tempo-reset-btn" class="control-btn">🔄 리셋</button>
+            <button id="tempo-stop-btn" class="control-btn" data-i18n="btnStop">⏹ 정지</button>
+            <button id="tempo-reset-btn" class="control-btn" data-i18n="btnReset">🔄 리셋</button>
           </div>
         </div>
       </main>
@@ -366,11 +409,11 @@
       <section class="more-tests-section">
         <div class="more-tests-card">
           <div class="more-tests-text">
-            <p class="more-tests-eyebrow">여기서 멈추기 아쉽죠</p>
-            <p class="more-tests-title">다른 재밌는 것들도 있어요</p>
-            <p class="more-tests-note">생각보다 취향 저격일지도 몰라요 👀</p>
+            <p class="more-tests-eyebrow" data-i18n="moreTestsEyebrow">여기서 멈추기 아쉽죠</p>
+            <p class="more-tests-title" data-i18n="moreTestsTitle">다른 재밌는 것들도 있어요</p>
+            <p class="more-tests-note" data-i18n="moreTestsNote">생각보다 취향 저격일지도 몰라요 👀</p>
           </div>
-          <button id="more-tests-btn" class="more-tests-btn" type="button">
+          <button id="more-tests-btn" class="more-tests-btn" type="button" data-i18n="btnMoreTests">
             더 구경하기
           </button>
         </div>
@@ -388,9 +431,202 @@
 
     <div id="loading" class="loading hidden">
       <div class="spinner"></div>
-      <p>드럼 비트를 불러오는 중...</p>
+      <p data-i18n="loadingBeat">드럼 비트를 불러오는 중...</p>
     </div>
 
+    <script>
+      // =========================
+      // i18n
+      // =========================
+      const translations = {
+        ko: {
+          metaTitle: "드럼비트 연습기 🥁 - 메트로놈 & 드럼 패턴 연습",
+          metaDescription: "메트로놈, 드럼 패턴 연습, 루딤먼트 훈련, 템포 트레이너. 매일 새로운 드럼 비트로 실력을 향상시키세요!",
+          title: "드럼비트 연습기 🥁",
+          modeBeat: "기본 비트",
+          modeRudiment: "루딤먼트",
+          modeTempo: "템포 트레이너",
+          labelTimeSignature: "박자:",
+          labelRudimentPattern: "루딤먼트 패턴:",
+          labelStartBpm: "시작 BPM:",
+          labelTargetBpm: "목표 BPM:",
+          labelPracticeTime: "연습 시간 (분):",
+          labelBpmIncrement: "BPM 증가량:",
+          trackHihat: "하이햇",
+          trackSnare: "스네어",
+          trackKick: "킥",
+          trackBass: "베이스",
+          trackGuitar: "기타",
+          btnPlay: "▶ 재생",
+          btnPause: "⏸ 정지",
+          btnMute: "🔇 뮤트 모드",
+          btnSoundMode: "🔊 사운드 모드",
+          btnReset: "🔄 리셋",
+          btnStart: "▶ 시작",
+          btnStop: "⏹ 정지",
+          btnRandomBeat: "🎲 랜덤 비트",
+          btnRandomMelody: "🎵 랜덤 멜로디",
+          btnShare: "공유하기 📤",
+          btnMoreTests: "더 구경하기",
+          loadingBeat: "드럼 비트를 불러오는 중...",
+          loadingBeatToday: "오늘의 드럼 비트를 불러오는 중...",
+          moreTestsEyebrow: "여기서 멈추기 아쉽죠",
+          moreTestsTitle: "다른 재밌는 것들도 있어요",
+          moreTestsNote: "생각보다 취향 저격일지도 몰라요 👀",
+          rudimentSingle: "Single Stroke (R L R L)",
+          rudimentDouble: "Double Stroke (R R L L)",
+          rudimentParadiddle: "Paradiddle (R L R R / L R L L)",
+          rudimentFlam: "Flam (R L R L)",
+          shareTitle: "오늘의 드럼 비트",
+          shareText: "오늘의 드럼 비트 🥁\n\n{name}\n{description}\nBPM: {bpm}\n\n👇 연습해보세요!\n{url}",
+          copiedToClipboard: "클립보드에 복사되었습니다!",
+          copyPrompt: "아래 텍스트를 복사하세요:",
+          errorLoadBeats: "비트 데이터를 불러올 수 없습니다.",
+          errorLoadBeat: "비트를 불러올 수 없습니다. 페이지를 새로고침해주세요.",
+          dayNames: ["일", "월", "화", "수", "목", "금", "토"],
+        },
+        en: {
+          metaTitle: "Drum Beat Trainer 🥁 - Metronome & Drum Pattern Practice",
+          metaDescription: "Metronome, drum pattern practice, rudiment training, tempo trainer. Improve your skills with new drum beats every day!",
+          title: "Drum Beat Trainer 🥁",
+          modeBeat: "Basic Beat",
+          modeRudiment: "Rudiment",
+          modeTempo: "Tempo Trainer",
+          labelTimeSignature: "Time Signature:",
+          labelRudimentPattern: "Rudiment Pattern:",
+          labelStartBpm: "Start BPM:",
+          labelTargetBpm: "Target BPM:",
+          labelPracticeTime: "Practice Time (min):",
+          labelBpmIncrement: "BPM Increment:",
+          trackHihat: "Hi-hat",
+          trackSnare: "Snare",
+          trackKick: "Kick",
+          trackBass: "Bass",
+          trackGuitar: "Guitar",
+          btnPlay: "▶ Play",
+          btnPause: "⏸ Pause",
+          btnMute: "🔇 Mute Mode",
+          btnSoundMode: "🔊 Sound Mode",
+          btnReset: "🔄 Reset",
+          btnStart: "▶ Start",
+          btnStop: "⏹ Stop",
+          btnRandomBeat: "🎲 Random Beat",
+          btnRandomMelody: "🎵 Random Melody",
+          btnShare: "Share 📤",
+          btnMoreTests: "Explore More",
+          loadingBeat: "Loading drum beats...",
+          loadingBeatToday: "Loading today's drum beat...",
+          moreTestsEyebrow: "Don't stop here",
+          moreTestsTitle: "There are more fun things",
+          moreTestsNote: "It might hit your taste more than you think 👀",
+          rudimentSingle: "Single Stroke (R L R L)",
+          rudimentDouble: "Double Stroke (R R L L)",
+          rudimentParadiddle: "Paradiddle (R L R R / L R L L)",
+          rudimentFlam: "Flam (R L R L)",
+          shareTitle: "Today's Drum Beat",
+          shareText: "Today's Drum Beat 🥁\n\n{name}\n{description}\nBPM: {bpm}\n\n👇 Try practicing!\n{url}",
+          copiedToClipboard: "Copied to clipboard!",
+          copyPrompt: "Copy the text below:",
+          errorLoadBeats: "Failed to load beat data.",
+          errorLoadBeat: "Failed to load beat. Please refresh the page.",
+          dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        },
+      };
+
+      const defaultLang = "ko";
+      const supportedLangs = ["ko", "en"];
+      let currentLang = defaultLang;
+
+      function t(key, vars = {}) {
+        const langTable = translations[currentLang] || translations.ko;
+        let template = langTable?.[key] ?? translations.ko?.[key] ?? key;
+        if (typeof template !== "string") return template;
+        Object.keys(vars).forEach((k) => {
+          template = template.replace(new RegExp(`\\{${k}\\}`, "g"), vars[k]);
+        });
+        return template;
+      }
+
+      function applyTranslations() {
+        document.title = t("metaTitle");
+        const descMeta = document.querySelector('meta[name="description"]');
+        if (descMeta) descMeta.setAttribute("content", t("metaDescription"));
+        const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+        if (ogTitleMeta) ogTitleMeta.setAttribute("content", t("metaTitle"));
+        const ogDescMeta = document.querySelector('meta[property="og:description"]');
+        if (ogDescMeta) ogDescMeta.setAttribute("content", t("metaDescription"));
+        const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]');
+        if (twitterTitleMeta) twitterTitleMeta.setAttribute("content", t("metaTitle"));
+        const twitterDescMeta = document.querySelector('meta[name="twitter:description"]');
+        if (twitterDescMeta) twitterDescMeta.setAttribute("content", t("metaDescription"));
+        document.documentElement.lang = currentLang;
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          el.textContent = t(el.dataset.i18n);
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          el.innerHTML = t(el.dataset.i18nHtml);
+        });
+        // Select options
+        document.querySelectorAll("select option[data-i18n-option]").forEach((el) => {
+          el.textContent = t(el.dataset.i18nOption);
+        });
+      }
+
+      function detectLang() {
+        const params = new URLSearchParams(window.location.search);
+        const paramLang = params.get("lang");
+        if (supportedLangs.includes(paramLang)) return paramLang;
+        const stored = localStorage.getItem("preferredLang");
+        if (supportedLangs.includes(stored)) return stored;
+        const intlLocale =
+          typeof Intl === "object" && typeof Intl.DateTimeFormat === "function"
+            ? Intl.DateTimeFormat().resolvedOptions().locale
+            : "";
+        const sources = [
+          ...(navigator.languages || []),
+          navigator.language,
+          navigator.userLanguage,
+          intlLocale,
+        ]
+          .filter(Boolean)
+          .map((locale) => locale.toLowerCase());
+        const hasKorean = sources.some((locale) => locale.startsWith("ko"));
+        return hasKorean ? "ko" : "en";
+      }
+
+      function setLang(lang, options = {}) {
+        const nextLang = supportedLangs.includes(lang) ? lang : defaultLang;
+        currentLang = nextLang;
+        window.currentLang = currentLang;
+        document.documentElement.lang = nextLang;
+        localStorage.setItem("preferredLang", nextLang);
+        document.querySelectorAll(".lang-switch button").forEach((button) => {
+          button.classList.toggle("active", button.dataset.lang === nextLang);
+        });
+        applyTranslations();
+        if (options.updateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("lang", nextLang);
+          window.history.replaceState({}, "", url);
+        }
+        // Update dynamic content if needed
+        if (window.updateDateDisplay) window.updateDateDisplay();
+        if (window.updateBeatDescription) window.updateBeatDescription();
+      }
+
+      document.querySelectorAll(".lang-switch button").forEach((button) => {
+        button.addEventListener("click", () => {
+          setLang(button.dataset.lang, { updateUrl: true });
+        });
+      });
+
+      setLang(detectLang(), { updateUrl: false });
+
+      // Make t() function and currentLang globally available
+      window.t = t;
+      window.currentLang = currentLang;
+      window.setLang = setLang;
+    </script>
     <script src="script.js"></script>
     <script>
       (function () {
